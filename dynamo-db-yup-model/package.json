@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@mrp-aws/dynamo-db-sdk": "bitbucket:isaacsennerholt/mrp-aws#dynamo-db-sdk-v1.0.4-gitpkg",
+    "@aws-tools/dynamo-db-sdk": "github:isaacSennerholt/aws-tools#dynamo-db-sdk-v1.0.0-gitpkg",
     "uuidv4": "^6.0.8",
     "yup": "^0.29.1"
   },

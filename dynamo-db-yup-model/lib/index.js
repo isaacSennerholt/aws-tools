@@ -1,6 +1,6 @@
 const yup = require('yup')
 const { v4: uuidv4 } = require('uuid')
-const dynamoDbSdk = require('@mrp-aws/dynamo-db-sdk')
+const dynamoDbSdk = require('@aws-tools/dynamo-db-sdk')
 
 const defaultShape = {
   id: yup.string().required(),
