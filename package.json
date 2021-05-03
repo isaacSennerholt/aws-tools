@@ -13,6 +13,7 @@
   "dependencies": {
     "dynamo-db-sdk": "file:dynamo-db-sdk",
     "dynamo-db-yup-model": "file:dynamo-db-yup-model",
+    "s3-sdk": "file:s3-sdk",
     "sns-sdk": "file:sns-sdk",
     "ssm-sdk": "file:ssm-sdk"
   },

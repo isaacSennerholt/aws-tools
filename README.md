@@ -4,7 +4,7 @@
 
 This repo contains AWS related tooling.
 
-### Publish a package
+### Publish a Package
 
 We use _gitpkg_ to publish our packages as git tags.
 
