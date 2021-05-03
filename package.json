@@ -1,0 +1,23 @@
+{
+  "name": "s3-sdk",
+  "version": "1.0.0",
+  "description": "SDK for S3.",
+  "main": "lib",
+  "private": true,
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/jest",
+    "test-unit-all": "npm run test -- unit"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.678.0"
+  },
+  "devDependencies": {
+    "jest": "20.0.4",
+    "prettier": "1.15.2"
+  }
+}
