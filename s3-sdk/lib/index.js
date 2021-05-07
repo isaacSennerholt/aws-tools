@@ -21,6 +21,14 @@ function configure({ region, endpoint = '' }) {
       }
       return await awsS3.getObject(parameters).promise()
     },
+    uploadToBucket: async ({ body, bucket, key }) => {
+      const parameters = {
+        Body: body,
+        Bucket: bucket,
+        Key: key,
+      }
+      return await awsS3.upload(parameters).promise()
+    },
   }
 }
 
