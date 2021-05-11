@@ -6,11 +6,19 @@ function configure({ region, endpoint = '' }) {
   const awsS3 = new AwsSdk.S3({ region, endpoint: awsEndpoint })
 
   return {
-    createBucketObject: async ({ body, bucket, key }) => {
+    createBucketObject: async ({
+      body,
+      bucket,
+      key,
+      contentEncoding,
+      contentType
+    }) => {
       const parameters = {
         Body: body,
         Bucket: bucket,
         Key: key,
+        ContentEncoding: contentEncoding,
+        ContentType: contentType
       }
       return await awsS3.putObject(parameters).promise()
     },
