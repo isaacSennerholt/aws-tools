@@ -7,16 +7,16 @@ function configure({ region, endpoint = '' }) {
 
   return {
     createBucketObject: async ({
-      body,
       bucket,
       key,
+      body,
       contentEncoding,
       contentType
     }) => {
       const parameters = {
-        Body: body,
         Bucket: bucket,
         Key: key,
+        Body: body,
         ContentEncoding: contentEncoding,
         ContentType: contentType
       }
@@ -29,11 +29,19 @@ function configure({ region, endpoint = '' }) {
       }
       return await awsS3.getObject(parameters).promise()
     },
-    uploadToBucket: async ({ body, bucket, key }) => {
+    uploadToBucket: async ({
+      bucket,
+      key,
+      body,
+      contentEncoding,
+      contentType
+    }) => {
       const parameters = {
-        Body: body,
         Bucket: bucket,
         Key: key,
+        Body: body,
+        ContentEncoding: contentEncoding,
+        ContentType: contentType
       }
       return await awsS3.upload(parameters).promise()
     },
