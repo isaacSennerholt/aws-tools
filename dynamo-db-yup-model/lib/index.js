@@ -10,7 +10,7 @@ const defaultShape = {
 
 function _reduceShapeToMatchPayload(originShape = {}, payload = {}) {
   return Object.keys(payload).reduce((reducedShape, payloadKey) => {
-    if (!payload[payloadKey] || !originShape[payloadKey]) return reducedShape
+    if (!originShape[payloadKey]) return reducedShape
     return { ...reducedShape, [payloadKey]: originShape[payloadKey] }
   }, {})
 }
