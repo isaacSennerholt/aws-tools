@@ -17,7 +17,8 @@ function _reduceShapeToMatchPayload(originShape = {}, payload = {}) {
 
 function _addMethodUnique(yup, dynamoDb) {
   yup.addMethod(yup.mixed, 'unique', function(indexName = '', message = '') {
-    return this.test('isUnique', message || 'The ${path} already exists', async function (value) {
+    return this.test('isUnique', message || 'The ${path} already exists', async function (value) {
+      if (!value) return true
       const { path } = this;
       const { Items } = await dynamoDb.queryByAttributes(indexName, { [path]: value })
       return !Items.length
