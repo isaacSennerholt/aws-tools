@@ -1,0 +1,25 @@
+{
+  "name": "dynamo-db-yup-model",
+  "version": "1.0.3",
+  "description": "Yup model for DynamoDB.",
+  "main": "lib",
+  "private": true,
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/jest",
+    "test-unit-all": "npm run test -- unit"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-tools/dynamo-db-sdk": "github:isaacSennerholt/aws-tools#dynamo-db-sdk-v1.0.1-gitpkg",
+    "uuidv4": "^6.0.8",
+    "yup": "^0.29.1"
+  },
+  "devDependencies": {
+    "jest": "20.0.4",
+    "prettier": "1.15.2"
+  }
+}
