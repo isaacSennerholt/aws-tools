@@ -1,9 +1,14 @@
 const AwsSdk = require('aws-sdk')
 
-function configure({ region, endpoint = '' }) {
+function configure({ region, endpoint = '', signatureVersion = 'v4' }) {
   const awsEndpointParameter = endpoint || `s3.${region}.amazonaws.com`
   const awsEndpoint = new AwsSdk.Endpoint(awsEndpointParameter)
-  const awsS3 = new AwsSdk.S3({ region, endpoint: awsEndpoint })
+  const awsS3 = new AwsSdk.S3({
+    signatureVersion,
+    region,
+    endpoint: awsEndpoint,
+    signatureVersion,
+  })
 
   return {
     createBucketObject: async ({
