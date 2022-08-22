@@ -29,6 +29,16 @@ function configure({ region, endpoint = '' }) {
       }
       return await awsS3.getObject(parameters).promise()
     },
+    deleteBucketObject: async ({
+      bucket,
+      key,
+    }) => {
+      const parameters = {
+        Bucket: bucket,
+        Key: key,
+      }
+      return await awsS3.deleteObject(parameters).promise()
+    },
     uploadToBucket: async ({
       bucket,
       key,
@@ -45,6 +55,21 @@ function configure({ region, endpoint = '' }) {
       }
       return await awsS3.upload(parameters).promise()
     },
+    getSignedUrl: async ({
+      bucket,
+      key,
+      expires,
+      contentType,
+      operation
+    }) => {
+      const parameters = {
+        Bucket: bucket,
+        Key: key,
+        Expires: expires,
+        ContentType: contentType
+      }
+      return awsS3.getSignedUrlPromise(operation, parameters)
+    }
   }
 }
 
