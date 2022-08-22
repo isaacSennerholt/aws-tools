@@ -20,7 +20,7 @@ function _addMethodUnique(yup, dynamoDb) {
     return this.test('isUnique', message || 'The ${path} already exists', async function (value) {
       if (!value) return true
       const { path } = this;
-      const { Items } = await dynamoDb.queryByAttributes(indexName, { [path]: value })
+      const { Items } = await dynamoDb.queryByAttributes({ indexName, attributes: { [path]: value } })
       return !Items.length
     })
   })
@@ -44,8 +44,8 @@ function init({ tableName, region, endpoint }) {
           const { Responses } = await dynamoDb.batchGetByAttributes(attributes)
           return Responses[tableName]
         },
-        queryByAttributes: async (indexName, attributes) => {
-          const { Items } = await dynamoDb.queryByAttributes(indexName, attributes)
+        queryByAttributes: async ({ indexName, attributes, limit, exclusiveStartKey }) => {
+          const { Items } = await dynamoDb.queryByAttributes({ indexName, attributes, limit, exclusiveStartKey })
           return Items
         },
         scanByAttributes: async (attributes) => {

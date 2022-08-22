@@ -1,6 +1,6 @@
 {
   "name": "dynamo-db-yup-model",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Yup model for DynamoDB.",
   "main": "lib",
   "private": true,
@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@aws-tools/dynamo-db-sdk": "github:isaacSennerholt/aws-tools#dynamo-db-sdk-v1.0.0-gitpkg",
+    "@aws-tools/dynamo-db-sdk": "github:isaacSennerholt/aws-tools#dynamo-db-sdk-v1.0.1-gitpkg",
     "uuidv4": "^6.0.8",
     "yup": "^0.29.1"
   },
