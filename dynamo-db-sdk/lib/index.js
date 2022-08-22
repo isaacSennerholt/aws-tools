@@ -23,7 +23,7 @@ function configure({ tableName, region, endpoint = '' }) {
     updateById: async (id, payload) => {
       const updateExpression = Object.keys(payload).reduce(
         (expression, key) => {
-          const keyExpression = `${key} = :${key}`
+          const keyExpression = `#${key} = :${key}`
           !expression
             ? (expression = `set ${keyExpression}`)
             : (expression = expression + `, ${keyExpression}`)
@@ -34,16 +34,23 @@ function configure({ tableName, region, endpoint = '' }) {
       )
       const expressionAttributeValues = Object.keys(payload).reduce(
         (attributeValues, key) => {
-          attributeValues[`:${key}`] = payload[key]
-          return attributeValues
+          return { ...attributeValues, [`:${ key }`]: payload[key] }
         },
         {}
       )
+      const expressionAttributeNames = Object.keys(payload).reduce(
+        (attributeNames, key) => {
+          return { ...attributeNames, [`#${key}`]: key }
+        },
+        {}
+      )
+
       const parameters = {
         TableName: tableName,
         Key: { id },
         UpdateExpression: updateExpression,
         ExpressionAttributeValues: expressionAttributeValues,
+        ExpressionAttributeNames: expressionAttributeNames,
         ConditionExpression: 'attribute_exists(id)',
         ReturnValues: 'ALL_NEW',
       }
@@ -72,7 +79,7 @@ function configure({ tableName, region, endpoint = '' }) {
       
       return awsDocumentClient.batchGet(parameters).promise()
     },
-    queryByAttributes: (indexName, attributes) => {
+    queryByAttributes: ({ indexName, attributes, limit, exclusiveStartKey }) => {
       const keyConditionExpression = Object.keys(attributes).reduce(
         (expression, key) => {
           const keyExpression = `${key} = :${key}`
@@ -93,6 +100,8 @@ function configure({ tableName, region, endpoint = '' }) {
         IndexName: indexName,
         KeyConditionExpression: keyConditionExpression,
         ExpressionAttributeValues: expressionAttributeValues,
+        ...(limit && { Limit: limit }),
+        ...(exclusiveStartKey && { ExclusiveStartKey: exclusiveStartKey }),
       }
 
       return awsDocumentClient.query(parameters).promise()
